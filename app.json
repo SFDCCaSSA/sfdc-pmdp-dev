@@ -1,0 +1,17 @@
+{
+  "name": "cassatrailmix",
+  "description": "Site proposal for CaSSA Trailmixes",
+  "repository": "",
+  "logo": "https://cdn.jsdelivr.net/gh/heroku/node-js-getting-started/public/node.svg",
+  "keywords": [
+  	"node",
+    "heroku",
+    "express",
+    "trailmix",
+    "lightning",
+    "design",
+    "system",
+    "cassa"
+],
+  "image": "heroku/nodejs"
+}

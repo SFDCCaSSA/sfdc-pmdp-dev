@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <% include ../partials/header.ejs %>
+    </head>
+
+    <body>
+
+        <% include ../partials/nav.ejs %>
+
+        <div id="contenido">
+            <div class="th-bg--midnight slds-p-vertical_large">
+                <div class="slds-container_x-large slds-container--center slds-p-horizontal_large">
+                    <div class="slds-text-align_center">
+                        <h2 id="vvTitulo" class="th-text th-text--x-large th-text--bold th-color--white slds-text-align_center slds-m-vertical_x-small">
+                            <%= configPage.titulo__c %>
+                            <span id="vvTituloSearch" ></span>
+                        </h2>
+                        <div id="vvSubtitulo" class="th-text th-text--default slds-m-top_x-small th-color--ice th-max-width--large slds-text-align_center">
+                            <%- configPage.subtitulo__c %>
+                        </div>
+                    </div>
+                    <hr class="slds-m-top_x-large slds-m-bottom_large" style="border-color: rgba(255,255,255,0.2);">
+                    <div class="filter">
+                        <div class="slds-is-relative">
+                            <h3 class="th-text--medium th-text--bold th-color--sand">
+                                <span>
+                                    Encuentre las rutas adecuadas para usted
+                                </span>
+                                <a class="filter-help clear-filter th-text--underline slds-m-left_medium" onclick="clearFilter();">
+                                    Borrar filtros
+                                </a>
+                            </h3>
+                            <a class="filter-toggler">
+                                <span class="slds-filtros slds-icon_container slds-icon-utility-chevronup" title="" style="display: inline-block;">
+                                -
+                                </span>
+
+                                <span class="slds-filtros slds-icon_container slds-icon-utility-chevrondown" title="" style="display: none;">
+                                +
+                                </span>
+
+                            </a>
+                        </div>
+                        <div class="slds-grid slds-wrap filter-groups">
+                            <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3 th-large-size-p-horizontal--large">
+                                <h3 class="th-text--default th-text--bold th-color--sand">
+                                    Productos (<%= filtros.nubes.length %>)
+                                </h3>
+                                <div class="tag-filter-list__container">
+                                    <ul class="tag-filter-list" data-filter-type="nube" style="columns: 2;">
+                                        <% filtros.nubes.forEach(function(r) { %>
+                                        <li>
+                                            <a class="label filter-tag" data-filter="nube-<%= r.replace(/ /g , "-") %>" href="#">
+                                                <%= r %>
+                                            </a>
+                                        </li>
+                                        <% }); %>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3">
+                                <h3 class="th-text--default th-text--bold th-color--sand">
+                                    Tags (<%= filtros.tags.length %>)
+                                </h3>
+                                <div class="tag-filter-list__container">
+                                    <ul class="tag-filter-list" data-filter-type="tag" style="columns: 2;">
+                                        <% filtros.tags.forEach(function(r) { %>
+                                        <li>
+                                            <a class="label filter-tag" data-filter="tag-<%= r.replace(/ /g , "-") %>" href="#">
+                                                <%= r %>
+                                            </a>
+                                        </li>
+                                        <% }); %>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3">
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <h3 class="th-text--default th-text--bold th-color--sand">
+                                            Tu rol
+                                        </h3>
+                                        <div class="tag-filter-list__container">
+                                            <ul class="tag-filter-list" data-filter-type="rol" style="columns: 1;">
+                                                <% filtros.roles.forEach(function(r) { %>
+                                                <li>
+                                                    <a class="label filter-tag" data-filter="rol-<%= r.replace(/ /g , "-") %>" href="#">
+                                                        <%= r %>
+                                                    </a>
+                                                </li>
+                                                <% }); %>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2 hidden">
+                                        <h3 class="th-text--default th-text--bold th-color--sand">
+                                            Tu nivel
+                                        </h3>
+                                        <div class="tag-filter-list__container">
+                                            <ul class="tag-filter-list" data-filter-type="nivel" style="columns: 1;">
+                                                <% filtros.niveles.forEach(function(r) { %>
+                                                <li>
+                                                    <a class="label filter-tag" data-filter="nivel-<%= r.replace(/ /g , "-") %>" href="#">
+                                                        <%= r %>
+                                                    </a>
+                                                </li>
+                                                <% }); %>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="th-bg--light">
+                <div class="content-container">
+                    <h2 class="trailhead-section-title hidden">
+                        Showing <span class="trailhead-active-items"><%= results.rowCount %></span> trails out of <span class="trailhead-total-items"><%= results.rowCount %></span>
+                    </h2>
+                    <h2 class="trailhead-section-title hidden">
+                        No results matched the selected criteria
+                    </h2>
+                    <div class="tiles-filterable tiles-container">
+
+                            <% results.rows.forEach(function(r) { %>
+
+                                <div class="<%= r.filtros %> tile-container">
+                                    <article class="tile tile-type-trail" data-api-name="learn-privacy-and-data-protection-law" data-content-type="<%= r.tipo__c %>">
+                                        <div class="tile-content">
+                                            <div class="tile-header" style="background-color: <%= r.cardheaderbgcolor__c %>">
+                                                <a title="<%= r.name %>" class="tile-icon" tabindex="-1" aria-hidden="true" href="<%= r.liga__c %>">
+                                                    <img alt="<%= r.name %>" class="tile-icon-image" src="/assets/images/trails/<%= r.cardheadericon__c %>">
+                                                </a>
+                                                <div class="tile-meta-content">
+                                                    <!--div class="progress-text">
+                                                        <%= r.estatus__c %>
+                                                    </div-->
+                                                    <div class="progress-text">
+                                                        <%= r.fecha__c %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tile-body">
+                                                <div>
+                                                    <span class="tile-type">
+                                                        <%= r.tipo__c %>
+                                                    </span>
+                                                </div>
+                                                <h3><a title="<%= r.name %>" class="tile-title" href="<%= r.liga__c %>">
+                                                    <%= r.name %>
+                                                </a></h3>
+                                                <div class="tile-description">
+                                                    <%= r.descripcioncorta__c %>
+                                                </div>
+                                                <ul class="tile-tags">
+                                                    <% if(r.rol__c!=null){ r.rol__c.split(";").forEach(function(r) { %>
+                                                    <li data-id="<%= r.id %>">
+                                                        <a class="tag" data-filter="rol-<%= r.replace(/ /g , "-") %>" data-genre="<%= r.tipo__c %>" data-type="rol" href="#" role="button">
+                                                            <%= r %>
+                                                        </a>
+                                                    </li>
+                                                    <% }); } %>
+                                                    <% if(r.tags__c!=null){ r.tags__c.split(";").forEach(function(r) { %>
+                                                    <li data-id="<%= r.id %>">
+                                                        <a class="tag" data-filter="tag-<%= r.replace(/ /g , "-") %>" data-genre="<%= r.tipo__c %>" data-type="tag" href="#" role="button">
+                                                            <%= r %>
+                                                        </a>
+                                                    </li>
+                                                    <% }); } %>
+                                                    <% if(r.nube__c!=null){ r.nube__c.split(";").forEach(function(r) { %>
+                                                    <li data-id="<%= r.id %>">
+                                                        <a class="tag" data-filter="nube-<%= r.replace(/ /g , "-") %>" data-genre="<%= r.tipo__c %>" data-type="nube" href="#" role="button">
+                                                            <%= r %>
+                                                        </a>
+                                                    </li>
+                                                    <% }); } %>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                            <% }); %>
+                    </div>
+                </div>
+        </main>
+        <script type="text/javascript">
+            $j(document).ready(function(){
+                $j(".filter-tag").click(function() {
+                    $j(this).toggleClass("filter-tag-active");
+                    filtrarVideos();
+                });
+
+                $j(".slds-filtros").click(function() {
+                    $j(".slds-filtros").show();
+                    $j(this).hide();
+                    $j(".filter-groups").toggleClass("hidden");
+                    $j(".clear-filter").toggleClass("hidden");
+                });
+            });
+
+
+            function filtrarVideos(){
+                if($j(".filter-tag-active").length > 0){
+                    $j(".tile-container").hide();
+
+                    $j(".filter-tag-active").each(function( index ) {
+                        var tagFilter = ".filter-" + $j( this ).data("filter");
+                        $j(tagFilter).show();
+                    });
+                }else{
+                    $j(".tile-container").show();
+                }
+            }
+
+            function clearFilter(){
+                $j(".filter-tag-active").removeClass("filter-tag-active");
+                filtrarVideos();
+            }
+        </script>
+    </body>
+</html>
