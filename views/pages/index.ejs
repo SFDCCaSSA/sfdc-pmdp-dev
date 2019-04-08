@@ -66,7 +66,7 @@
                                     googleCalendarApiKey: '<%= process.env.GOOGLE_CALENDAR_API_KEY %>',
                                     eventSources: [
                                         {
-                                            googleCalendarId: 'salesforce.com_s7sc4bik4tsm4urd43k98473t0@group.calendar.google.com',
+                                            googleCalendarId: '<%= GOOGLE_CALENDAR_ID %>',
                                             className: 'gcal-event'
                                         }/**,
                                         {
@@ -83,11 +83,6 @@
                                 });
                                 
                             </script>
-
-
-                            <div class="responsiveCal hidden">
-          <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=salesforce.com_s7sc4bik4tsm4urd43k98473t0%40group.calendar.google.com&amp;color=%23B1440E&amp;ctz=America%2FMexico_City" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-                            </div>
                         </div>
                         <div class="tile-grid tiles-container">
                             
